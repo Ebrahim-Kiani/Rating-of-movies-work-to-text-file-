@@ -1,4 +1,13 @@
 from tkinter import *
+def average(averagerating , numvotes , vote):
+    averagerating1=float(averagerating)
+    numvotes1=int(numvotes)
+    vote1=int(vote)
+    old_vote = averagerating1 * numvotes1
+    vote1 += old_vote
+    return float(vote1 / (numvotes1+1)) 
+
+
 def Enter():
     #integers
     list_box_entry=list_box.get(ACTIVE)
@@ -13,16 +22,25 @@ def Enter():
     print(key)
 
     ###############
-    films_rate=open("H:\\title.ratings.txt" , 'r+')
+    films_rate=open("C:\\Users\\Shahab\\Desktop\\uni-projects\\DS-00-Phase1\\title.ratings.txt" , 'r+')
     menue_rate= films_rate.readlines()
     name_films=[]
+    
     for film in menue_rate:
         name_films+=(film.split('\t'))
 
-    name_films[2+2*key]=str(value_grade)
+    average_rate = name_films[1+3*key]
 
-    print(name_films)
-    edit=open("G:\\title.ratings.txt" , 'w+')
+    numvote = name_films[2+3*key]
+    name_films[1+3*key]= str(average(average_rate , numvote , value_grade )) ####
+    name_films[2+3*key]=int(name_films[2+3*key])
+    name_films[2+3*key] +=1
+    name_films[2+3*key] = str(name_films[2+3*key])
+    name_films[2+3*key] += '\n'
+
+
+    print(name_films[1+3*key])
+    edit=open("C:\\Users\\Shahab\\Desktop\\uni-projects\\DS-00-Phase1\\title.akas.txt" , 'w+')
     j=0
     for edits in name_films:
          j+=1
